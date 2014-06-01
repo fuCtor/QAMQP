@@ -112,8 +112,15 @@ void ClientPrivate::parseCnnString( const QUrl & con )
 		q->setPassword(con.password());
 		q->setUser(con.userName());
 		q->setPort(con.port(AMQPPORT));
-		q->setHost(con.host());				
-		q->setVirtualHost(con.path());
+		q->setHost(con.host());
+                QString path = con.path();
+                // Path from URL always contains leading / and cannot
+                // be used as vhost name. Accoring to AMQP URI spec,
+                // leading / is not part of vhost name, for details see:
+                // http://www.rabbitmq.com/uri-spec.html
+                if (path.startsWith("/"))
+                    path.remove(0, 1);
+		q->setVirtualHost(path);
 	}
 }
 
