@@ -1,3 +1,6 @@
+###NOTICE
+***Project moved to https://github.com/mbroadst/qamqp***
+
 QAMQP
 =============
 Qt4/Qt5 implementation of AMQP 0.9.1.
